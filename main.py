@@ -5,7 +5,7 @@ from telegram import ParseMode
 from telegram import InlineQueryResultArticle, ParseMode, InputTextMessageContent, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
-from logs import logger
+# from logs import logger
 from uuid import *
 
 # t.me/tobinary_bot
@@ -115,11 +115,11 @@ def error(update, context):
     """Log Errors caused by Updates."""
     influx_query('bots,botname=tobinarybot,actiontype=errors error=true')
 
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    # logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 def main():
-    logger.info(f"Application started")
+    # logger.info(f"Application started")
 
     #setup telegram bot
     updater = Updater(bot_token, use_context=True)
@@ -134,7 +134,7 @@ def main():
     # log all errors
     dp.add_error_handler(error)
 
-    logger.info(f"Starting bot")
+    # logger.info(f"Starting bot")
 
     # Start the Bot
     updater.start_polling()
