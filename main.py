@@ -6,23 +6,21 @@ from telegram import InlineQueryResultArticle, ParseMode, InputTextMessageConten
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler
 from telegram.utils.helpers import escape_markdown
 from logs import logger
-from stats_logger import StatsLogger
 from uuid import *
 
 # t.me/tobinary_bot
-bot_token = 'TELEGRAM_BOT_TOKEN'
-influx_db_address = 'http://server_address:8086/write?db=database_name'
-influx_db_credentials = 'login:password'
-
+bot_token = os.getenv('TOBINARYBOT_TELEGRAM_TOKEN')
+influx_query_url = os.getenv('TOBINARYBOT_INFLUX_QUERY')
 
 def influx_query(query_str: str):
-    try:
-        url = influx_db_address
-        headers = {'Content-Type': 'application/Text', 'Authorization': f'Token {influx_db_credentials}'}
+    if influx_query:
+        try:
+            url = influx_query_url
+            headers = {'Content-Type': 'application/Text'}
 
-        x = requests.post(url, data = query_str, headers=headers)
-    except Exception as e:
-        print(e)
+            x = requests.post(url, data=query_str.encode('utf-8'), headers=headers)
+        except Exception as e:
+            print(e)
 
 
 def start(update, context):
