@@ -3,17 +3,29 @@ Telegram bot for converting number values
 
 ## Install
 
-```python
-    pip install -r requirements.txt
+
+Use next environment variables:
+
+* `TOBINARYBOT_TELEGRAM_TOKEN={YOUR_TOKEN}` - telegram token
+* `TOBINARYBOT_INFLUX_QUERY={URL}` - url for [influxDB](https://www.influxdata.com/) logging, bot won't log metrics if that URL not defined.
+
+**Python:** Add to system environment that variables.
+
+**Docker compose:**  create `.env` file and fill it with that variables.
+
+## Run
+
+### Docker compose
+
+Then run in console command:
+
+```
+docker-compose up -d
 ```
 
-Fill credentials at `main.py` and run
+### Python
 
-```python
-    token ='TELEGRAM_BOT_TOKEN'
-    admin_id = 9379992 #Your telegram id
-    influx_db_address = 'http://server_address:8086/write?db=database_name'
-    influx_db_credentials = 'login:password'
 ```
-
-What is [influxDB](https://www.influxdata.com/)?
+pip3 install -r requirements.txt
+python main.py
+```
